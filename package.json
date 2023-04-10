@@ -1,0 +1,15 @@
+{
+  "name": "generator-mgcrv",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "shaojie1025@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "mkdirp": "^3.0.0",
+    "yeoman-generator": "^5.8.0"
+  }
+}

@@ -1,0 +1,17 @@
+.header__nav {
+  color: #fff;
+  font-size: 14px;
+
+  &__item {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__item--active {
+    background-color: rgb(252 252 254 / 15%);
+    height: 100%;
+  }
+}
