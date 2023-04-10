@@ -45,8 +45,8 @@ module.exports = class extends Generator {
     this.answers = answers
   }
 
-  writing() {
-    simpleGit({
+  async writing() {
+    const git = simpleGit({
       baseDir: this.destinationRoot(),
       silent: true,
     }, (err) => {
@@ -56,7 +56,8 @@ module.exports = class extends Generator {
       }
 
       this.log(`Git repository initialized`);
-    });
+    })
+    await git.init();
     
     this.log('Writing...')
     
