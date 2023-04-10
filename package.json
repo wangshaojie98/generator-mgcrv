@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "mkdirp": "^3.0.0",
+    "simple-git": "^3.17.0",
     "yeoman-generator": "^5.8.0"
   }
 }

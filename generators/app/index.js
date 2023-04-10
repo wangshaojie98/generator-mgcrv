@@ -1,6 +1,7 @@
 const Generator = require('yeoman-generator')
 const {mkdirp} = require("mkdirp");
 const path = require("path");
+const simpleGit = require('simple-git')
 
 
 module.exports = class extends Generator {
@@ -45,7 +46,21 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    simpleGit({
+      baseDir: this.destinationRoot(),
+      silent: true,
+    }, (err) => {
+      if (err) {
+        this.log(`Failed to initialize Git repository: ${err}`);
+        return;
+      }
+
+      this.log(`Git repository initialized`);
+    });
+    
     this.log('Writing...')
+    
+
     this.fs.copyTpl(this.templatePath("package.json"), this.destinationPath("package.json"), {
       projectName: this.answers.projectName,
       description: this.answers.description,
