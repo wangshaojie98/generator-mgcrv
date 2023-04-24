@@ -58,7 +58,14 @@ module.exports = class extends Generator {
       this.log(`Git repository initialized`);
     })
     await git.init();
-    
+    // 复制 .dot-gitignore 文件到 .gitignore 文件中
+    fs.copyFile('dot-gitignore', '.gitignore', (err) => {
+      if (err) {
+        console.error('Error copying .dot-gitignore to .gitignore:', err);
+      } else {
+        console.log('.dot-gitignore copied to .gitignore successfully');
+      }
+    });
     this.log('Writing...')
     
 
