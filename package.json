@@ -2,7 +2,9 @@
   "name": "generator-mgcrv",
   "version": "1.0.1",
   "description": "",
-  "main": "index.js",
+  "files": [
+    "generators"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
