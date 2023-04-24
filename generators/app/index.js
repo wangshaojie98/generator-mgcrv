@@ -86,7 +86,6 @@ module.exports = class extends Generator {
       'package.json',
       'public',
       'src',
-      'test.js',
       'tsconfig.json',
       'tsconfig.node.json',
       'vite.config.ts'
