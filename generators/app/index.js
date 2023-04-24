@@ -2,7 +2,6 @@ const Generator = require('yeoman-generator')
 const {mkdirp} = require("mkdirp");
 const path = require("path");
 const simpleGit = require('simple-git')
-const fs = require('fs')
 
 
 module.exports = class extends Generator {
@@ -60,13 +59,8 @@ module.exports = class extends Generator {
     })
     await git.init();
     // 复制 .dot-gitignore 文件到 .gitignore 文件中
-    fs.copyFile('dot-gitignore', '.gitignore', (err) => {
-      if (err) {
-        console.error('Error copying .dot-gitignore to .gitignore:', err);
-      } else {
-        console.log('.dot-gitignore copied to .gitignore successfully');
-      }
-    });
+    this.fs.copy(this.templatePath('_gitignore'), this.destinationPath('.gitignore'))
+    this.fs.copy(this.templatePath('_npmrc'), this.destinationPath('.npmrc'))
     this.log('Writing...')
     
 
