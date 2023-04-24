@@ -23,7 +23,7 @@ const H2 = styled.h2`
   line-height: 16px;
   font-weight: bold;
   font-family: inherit;
-  margin-bottom: 0;
+  margin: 0;
   ${props => styleMapParser({ styledProps: props })}
 `
 
@@ -36,7 +36,7 @@ const H3 = styled.h3`
   line-height: 14px;
   font-weight: bold;
   font-family: inherit;
-  margin-bottom: 0;
+  margin: 0;
   ${props => styleMapParser({ styledProps: props })}
 `
 

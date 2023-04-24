@@ -1,23 +1,16 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import './home.scss'
+import { useEffect } from 'react'
+import { Box } from '@/styled_components/base'
 
-function Index() {
+const Demo = () => {
+  useEffect(() => {
+    console.log('demo init')
+  }, [])
+
   return (
-    <div className="main">
-      <ul>
-        <li>
-          <Link to={'/login'}>login12</Link>
-        </li>
-        <li>
-          <Link to={'/quick-report'}>/quick-report</Link>
-        </li>
-        <li>
-          <Link to={'/page2'}>/page2</Link>
-        </li>
-      </ul>
-    </div>
+    <Box>
+      <h1>主页</h1>
+    </Box>
   )
 }
 
-export default Index
+export default Demo

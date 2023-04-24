@@ -14,7 +14,7 @@ module.exports = {
       // TODO 三种环境
       config.proxy = {
         '/api/neptune/*': {
-          target: ``,
+          target: `http://k8s-master-1036.m8-test.cloud.17zuoye.net:23301`,
           // pathRewrite: { '^/api/neptune': '' },
           changeOrigin: true
         }

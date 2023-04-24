@@ -1,6 +1,12 @@
 import { makeAutoObservable, runInAction } from 'mobx'
-import { getUserInfoFromCookie, type UserInfo, loginFromPassword } from '@/api/login'
 import _ from 'lodash'
+import {
+  getUserInfoFromCookie,
+  type UserInfo,
+  loginFromPassword,
+  loginFromToken
+} from '@/api/login'
+import { EXAM_LEVELS } from '@/constants'
 
 class User {
   userInfo: UserInfo | null = null
@@ -35,13 +41,19 @@ class User {
     return !_.isEmpty(this.userInfo?.user_id)
   }
 
-  async loginFromPassword(args: {
-    phone: string
-    password: string
-    validate_code: string
-    validate_id: string
-  }) {
+  async loginFromPassword(args: { phone: string; password: string }) {
+    console.log('args: ', args)
     const res = await loginFromPassword(args)
+
+    if (args.phone && args.password) {
+      this.setUser(res as any)
+
+      console.log(this.userInfo)
+    }
+  }
+
+  async loginFromToken(args: { token: string }) {
+    const res = await loginFromToken(args)
 
     runInAction(() => {
       if (res?.user?.user_id) {
@@ -49,19 +61,21 @@ class User {
       }
     })
   }
+
+  getExamLevels() {
+    let res: [] | { label: string; value: string }[] = EXAM_LEVELS
+    if (this.userInfo) {
+      const {
+        job: { role },
+        level
+      } = this.userInfo
+
+      if (role === 'user') {
+        res = res.filter(examLevel => level.includes(examLevel))
+      }
+    }
+    return res
+  }
 }
 
 export default new User()
-/**
- * 1.路由权限控制
- *  a. 用一个store存储是否登录的user，
- *    getUser
- *    setUser
- *    getUserFromToken
- *    setUserFromToken
- *    logout，重置user和token
- *  b. 每次路由判断是否有user，如果有则放行
- *     如果没有则根据cookie的token是否存在，
- *        如果存在token，则使用token去获取user,
- *        如果不存在则跳转到/login,如果
- */

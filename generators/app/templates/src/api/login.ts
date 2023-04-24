@@ -1,11 +1,12 @@
 import Request from './index'
+import Cookies from 'js-cookie'
 /**
  * 登录相关
  */
 
 const BASE_URL = '/login'
 
-interface Login {
+interface LoginFromPhoneCodeParams {
   phone: string
   code: string
 }
@@ -13,8 +14,6 @@ interface Login {
 interface LoginFromPassword {
   phone: string
   password: string
-  validate_code: string
-  validate_id: string
 }
 
 export interface UserInfo {
@@ -49,14 +48,35 @@ export interface Job {
   creator: string
 }
 
-export const loginFromPhoneCode = async (params: Login) => {
+export interface LoginRes {
+  success: boolean
+  message: string
+  user: UserInfo
+}
+export const loginFromPhoneCode = async (params: LoginFromPhoneCodeParams) => {
+  console.log('params: ', params)
   return Request.post(`${BASE_URL}/user_login`)
 }
 
 export const loginFromPassword = async (params: LoginFromPassword) => {
-  return Request.post(`${BASE_URL}/login_password`, params)
+  console.log('params: ', params)
+  const mock = { user_id: 'admin' }
+  Cookies.set('token', JSON.stringify(mock))
+
+  return mock
 }
 
 export const getUserInfoFromCookie = async () => {
-  return Request.get<UserInfo>(`/user/user_info_by_cookie`)
+  // return Request.get<UserInfo>(`/user/user_info_by_cookie`)
+
+  const json = Cookies.get('token')
+  if (json) {
+    return JSON.parse(json)
+  }
+
+  return null
+}
+
+export const loginFromToken = async (params: { token: string }) => {
+  return Request.post<LoginRes>(`${BASE_URL}/user_login_from_token`, params)
 }

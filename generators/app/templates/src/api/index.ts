@@ -45,7 +45,6 @@ export class Request {
 
     this.instance.interceptors.response.use(
       (res: AxiosResponse) => {
-        console.log('res: ', res)
         return res.data.data
       },
       async (err: any) => {
@@ -98,12 +97,21 @@ export class Request {
     return await this.instance.request(config)
   }
 
-  public async get<T = any>(url: string, config?: AxiosRequestConfig): Promise<T> {
-    return await this.instance.get(url, config)
+  public async get<T = any>(
+    url: string,
+    params?: object,
+    config: AxiosRequestConfig = {}
+  ): Promise<T> {
+    return await this.instance.get(url, { params, ...config })
   }
 
   public async post<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
     return await this.instance.post(url, data, config)
+  }
+
+  // https://axios-http.com/docs/multipart
+  public async postForm<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
+    return await this.instance.postForm(url, data, config)
   }
 
   public async put<T = any>(

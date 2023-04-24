@@ -34,7 +34,8 @@ module.exports = {
     'react/react-in-jsx-scope': 0,
     '@typescript-eslint/no-redeclare': 0,
     '@typescript-eslint/no-unnecessary-type-assertion': 0,
-    'import/no-absolute-path': 0
+    'import/no-absolute-path': 0,
+    'react/prop-types': 0
   },
   settings: {
     react: {

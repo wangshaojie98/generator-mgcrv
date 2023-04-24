@@ -1,5 +1,4 @@
-import { makeAutoObservable, runInAction } from 'mobx'
-import { getValidateId } from '@/api/system'
+import { makeAutoObservable } from 'mobx'
 import { type NavigateFunction } from 'react-router-dom'
 import { type FormInstance } from 'antd'
 import userStore from '@/store/user'
@@ -17,8 +16,7 @@ type ModelConstructorProps = {
 export class Model {
   initialValues = {
     phone: undefined,
-    password: undefined,
-    validateCode: undefined
+    password: undefined
   }
 
   form: any = undefined
@@ -32,17 +30,15 @@ export class Model {
   }
 
   async onFinish(args: FormField) {
-    const { validateId } = this
-    if (args.phone && args.validateCode && args.password) {
+    console.log('args: ', args)
+    if (args.phone && args.password) {
       await userStore.loginFromPassword({
         phone: args.phone,
-        validate_code: args.validateCode,
-        validate_id: validateId,
         password: args.password
       })
 
       if (userStore.isLogin) {
-        this.navigate?.('/', { state: { from: '/login' } })
+        this.navigate?.('/', { replace: true })
       }
     }
   }
@@ -51,18 +47,5 @@ export class Model {
 
   onReset() {
     this.form.resetFields()
-  }
-
-  onValidateCodeChange() {
-    this.getValidateId()
-  }
-
-  async getValidateId() {
-    const res = await getValidateId()
-
-    runInAction(() => {
-      this.validateId = res.validate_id
-      console.log(this)
-    })
   }
 }

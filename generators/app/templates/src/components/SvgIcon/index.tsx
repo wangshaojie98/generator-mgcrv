@@ -1,8 +1,10 @@
+// import { CSSProperties } from "react"
+export type SVGName = 'appstore-outlined' | 'question-circle'
 interface SvgIconProps {
-  name: string
+  name: SVGName
   color?: string
   prefix?: string
-  style?: Record<string, any>
+  style?: React.CSSProperties
 }
 
 export default function SvgIcon(props: SvgIconProps) {
@@ -10,7 +12,7 @@ export default function SvgIcon(props: SvgIconProps) {
     name,
     prefix = 'icon',
     color = '#333',
-    style = { width: '100px', height: '100px' }
+    style = { width: '100px', height: '100px', color: '#787878' }
   } = props
   const symbolId = `#${prefix}-${name}`
 

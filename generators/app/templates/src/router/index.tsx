@@ -17,54 +17,37 @@ const routes = [
       key: 'login'
     }
   },
+  // {
+  //   id: 'LoginByToken',
+  //   path: '/login-by-token',
+  //   loader: loginAuthLoader,
+  //   element: lazyLoad(React.lazy(async () => import('@/pages/login/loginByToken')))
+  // },
   {
     id: 'root',
     path: '/',
     loader: rootAuthLoader,
-    element: <Layout />,
     children: [
       {
         id: 'redirect to /home',
         path: '',
-        element: <Navigate replace to="/quick-report/list" />
+        element: <Navigate replace to="/home/main" />
       },
       {
-        // NOTE 这一层可以不做渲染
-        id: '快捷报告',
-        path: 'quick-report',
+        element: <Layout />,
+        id: '主页',
+        path: 'home',
         handle: {
-          title: '快捷报告',
+          title: '主页',
           icon: 'appstore-outlined'
         },
         children: [
           {
-            id: 'redirect to /quick-report/list',
-            path: '',
-            element: <Navigate replace to="/quick-report/list" />
-          },
-          {
-            id: '快捷报告列表',
-            path: 'list',
-            element: lazyLoad(React.lazy(async () => import('@/pages/quickReport/list')))
-          },
-          {
-            id: '生成报告流程',
-            path: 'create',
-            element: lazyLoad(React.lazy(async () => import('@/pages/quickReport/create'))),
-            handle: {
-              title: '生成报告流程'
-            }
+            id: '主页-main',
+            path: 'main',
+            element: lazyLoad(React.lazy(async () => import('@/pages/home')))
           }
         ]
-      },
-      {
-        id: 'Page2',
-        path: 'page2',
-        element: lazyLoad(React.lazy(async () => import('@/pages/page2'))),
-        handle: {
-          title: 'Page2',
-          icon: 'question-circle'
-        }
       }
     ]
   },

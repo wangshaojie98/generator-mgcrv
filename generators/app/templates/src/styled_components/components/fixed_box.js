@@ -7,7 +7,7 @@ import { positionValueParser, styleMapParser } from '../parsers'
  *
  */
 const FixedBox = styled.div`
-  position: absolute;
+  position: fixed;
   overflow-anchor: none;
   ${props => {
     const style = styleMapParser({
