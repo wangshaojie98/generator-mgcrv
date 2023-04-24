@@ -2,6 +2,7 @@ const Generator = require('yeoman-generator')
 const {mkdirp} = require("mkdirp");
 const path = require("path");
 const simpleGit = require('simple-git')
+const fs = require('fs')
 
 
 module.exports = class extends Generator {
