@@ -59,8 +59,7 @@ module.exports = class extends Generator {
     })
     await git.init();
     // 复制 .dot-gitignore 文件到 .gitignore 文件中
-    this.fs.copy(this.templatePath('_gitignore'), this.destinationPath('.gitignore'))
-    this.fs.copy(this.templatePath('_npmrc'), this.destinationPath('.npmrc'))
+    
     this.log('Writing...')
     
 
@@ -72,13 +71,15 @@ module.exports = class extends Generator {
       license: this.answers.license
     });
 
+    this.fs.copyTpl(this.templatePath('_gitignore'), this.destinationPath('.gitignore'))
+    this.fs.copyTpl(this.templatePath('_npmrc'), this.destinationPath('.npmrc'))
     const needCopyFiles = [
       '.editorconfig',
       '.eslintignore',
       '.eslintrc.js',
-      '.gitignore',
+      // '.gitignore',
       '.husky',
-      '.npmrc',
+      // '.npmrc',
       '.prettierrc',
       '.stylelintrc.js',
       '.vscode',
