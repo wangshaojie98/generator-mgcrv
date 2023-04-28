@@ -17,7 +17,7 @@ export default defineConfig({
     cors: true,
     proxy: {
       '/api': {
-        target: `http://k8s-master-1036.m8-test.cloud.17zuoye.net:23301`,
+        target: `xxxx`,
         // target: `http://localhost:3300`,
         // rewrite: (path) => path.replace(/^\/api\/neptune/, ''),
         changeOrigin: true
